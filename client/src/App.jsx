@@ -18,7 +18,7 @@ function App() {
       const result = await res.json();
       setData(result);
     } catch (err) {
-      setError("User not found");
+      setError("❌ User not found or API error");
     }
 
     setLoading(false);
@@ -47,6 +47,7 @@ function App() {
           <img src={data.profile.avatar_url} alt="avatar" />
           <h2>{data.profile.name}</h2>
           <p>@{data.profile.login}</p>
+          <p>Joined: {new Date(data.profile.created_at).toDateString()}</p>
 
           <div className="stats">
             <span>Followers: {data.profile.followers}</span>
@@ -64,6 +65,10 @@ function App() {
                 <h3>{repo.name}</h3>
               </a>
               <p>{repo.description}</p>
+
+<p>
+  ⭐ {repo.stargazers_count} | 🍴 {repo.forks_count}
+</p>
             </div>
           ))}
       </div>

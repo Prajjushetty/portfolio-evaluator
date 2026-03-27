@@ -72,3 +72,7 @@ button:hover {
 .stats span {
   margin: 0 5px;
 }
+.repo-card p {
+  margin: 5px 0;
+  font-size: 14px;
+}
