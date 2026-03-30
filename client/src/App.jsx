@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import "./App.css";
 function App() {
   const [username, setUsername] = useState("octocat");
   const [user, setUser] = useState(null);
@@ -35,10 +35,11 @@ function App() {
     fetchGitHubData(); // default load
   }, []);
 
-  return (
-    <div className="container">
-      <h1>GitHub Profile Viewer</h1>
+return (
+  <div className="container">
+    <h1>GitHub Profile Viewer</h1>
 
+    <div className="search-box">
       <input
         type="text"
         value={username}
@@ -46,34 +47,44 @@ function App() {
         placeholder="Enter GitHub username"
       />
       <button onClick={fetchGitHubData}>Search</button>
+    </div>
 
-      {/* Loading */}
-      {loading && <p>Loading...</p>}
+    {loading && <p>Loading...</p>}
+    {error && <p style={{ color: "red" }}>{error}</p>}
 
-      {/* Error */}
-      {error && <p style={{ color: "red" }}>{error} ❌</p>}
+    {user && !loading && (
+      <div className="card">
+        <img src={user.avatar_url} alt="avatar" width="100" />
+        <h2>{user.name}</h2>
+        <p>@{user.login}</p>
+        <p>Followers: {user.followers}</p>
+        {user.bio && <p>{user.bio}</p>}
+        {user.location && <p>📍 {user.location}</p>}
+        <a href={user.html_url} target="_blank" rel="noreferrer">
+          View GitHub Profile
+        </a>
+      </div>
+    )}
 
-      {/* User Info */}
-      {user && !loading && (
-        <div className="card">
-          <img src={user.avatar_url} alt="" width="100" />
-          <h2>{user.name}</h2>
-          <p>@{user.login}</p>
-          <p>Followers: {user.followers}</p>
-        </div>
+    <div className="repo-container">
+      {repos.length === 0 && !loading && !error && (
+        <p>No repositories found.</p>
       )}
 
-      {/* Repo List */}
-      <div className="repo-container">
-        {repos.map((repo) => (
-          <div key={repo.id} className="repo-card">
+      {repos.map((repo) => (
+        <div key={repo.id} className="repo-card">
+          <a href={repo.html_url} target="_blank" rel="noreferrer">
             <h3>{repo.name}</h3>
-            <p>⭐ {repo.stargazers_count}</p>
-          </div>
-        ))}
-      </div>
+          </a>
+
+          <p>{repo.description || "No description available"}</p>
+          <p>⭐ {repo.stargazers_count} | 🍴 {repo.forks_count}</p>
+          {repo.language && <p>💻 {repo.language}</p>}
+        </div>
+      ))}
     </div>
-  );
+  </div>
+);
 }
 
 export default App;

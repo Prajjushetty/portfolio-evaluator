@@ -1,32 +1,37 @@
 body {
+  margin: 0;
   background-color: #0d1b2a;
   color: white;
   font-family: Arial, sans-serif;
-  text-align: center;
 }
 
 .container {
   padding: 20px;
   max-width: 1200px;
   margin: auto;
+  text-align: center;
+}
+
+.search-box {
+  margin-bottom: 20px;
 }
 
 input {
-  padding: 12px;
-  width: 260px;
+  padding: 10px;
+  width: 250px;
   max-width: 80%;
   margin-right: 10px;
-  border-radius: 8px;
+  border-radius: 6px;
   border: none;
   outline: none;
 }
 
 button {
-  padding: 12px 18px;
+  padding: 10px 15px;
   background-color: #3b82f6;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
 }
 
@@ -34,40 +39,64 @@ button:hover {
   background-color: #2563eb;
 }
 
-
 .card {
   background: #1b263b;
-  padding: 25px;
-  border-radius: 14px;
-  margin: 25px auto;
+  padding: 20px;
+  border-radius: 12px;
+  margin: 20px auto;
   width: 320px;
   max-width: 90%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
+
 .card img {
   border-radius: 50%;
   margin-bottom: 10px;
   border: 3px solid #3b82f6;
 }
 
+.card a {
+  display: inline-block;
+  margin-top: 10px;
+  color: #60a5fa;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
 .repo-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  margin-top: 25px;
+  margin-top: 30px;
+  width: 100%;
 }
 
 .repo-card {
   background: #1b263b;
   padding: 18px;
   border-radius: 12px;
-  transition: transform 0.3s, box-shadow 0.3s;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  text-align: center;
 }
 
-.repo-card:hover {
-  transform: translateY(-5px);
+.repo-card a {
+  color: #a5b4fc;
+  text-decoration: none;
 }
+
+.repo-card a:hover {
+  text-decoration: underline;
+}
+
+.repo-card p {
+  margin: 8px 0;
+  line-height: 1.4;
+}
+
 @media (max-width: 600px) {
   input {
     width: 100%;
@@ -76,10 +105,6 @@ button:hover {
 
   button {
     width: 100%;
-  }
-
-  .card {
-    width: 90%;
   }
 
   .repo-container {
