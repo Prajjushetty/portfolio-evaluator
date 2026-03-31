@@ -34,7 +34,9 @@ function App() {
   useEffect(() => {
     fetchGitHubData(); // default load
   }, []);
-
+const topRepos = [...repos]
+  .sort((a, b) => b.stargazers_count - a.stargazers_count)
+  .slice(0, 6);
 return (
   <div className="container">
     <h1>GitHub Profile Viewer</h1>
@@ -65,14 +67,15 @@ return (
         </a>
       </div>
     )}
-
+    <h2 className="repo-heading">Top Repositories</h2>
     <div className="repo-container">
       {repos.length === 0 && !loading && !error && (
         <p>No repositories found.</p>
       )}
 
-      {repos.map((repo) => (
+      {topRepos.map((repo, index) => (
         <div key={repo.id} className="repo-card">
+          <p><strong>Rank #{index + 1}</strong></p>
           <a href={repo.html_url} target="_blank" rel="noreferrer">
             <h3>{repo.name}</h3>
           </a>
